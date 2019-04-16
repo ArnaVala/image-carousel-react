@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import FontAwesome from "react-fontawesome";
 import ImageCarousel from './ImageCarousel';
 
 
@@ -33,9 +34,17 @@ const App = () => {
   return (
     <Container>
       <h1 className="app__name"> React Image Carousel</h1>
-      <ImageCarousel
-        images={images}
-      />
+      <ImageCarousel images={images} />
+      <footer>
+        <a
+          href="https://github.com/arnavala/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesome className="github" name="github" />
+          <p>Arna Vala</p>
+        </a>
+      </footer>
     </Container>
   );
 

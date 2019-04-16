@@ -4,31 +4,43 @@ import FontAwesome from "react-fontawesome";
 
 
 const Wrapper = styled.div`
-  width: 675px;
+  width: 300px;
   overflow: hidden;
-  box-shadow: 2px 4px 20px rgba(0,0,0,0.2);
-`
+  box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.2);
+
+  @media screen and (min-width: 760px) {
+    width: 675px;
+  }
+`;
 
 const Carousel = styled.div`
   overflow: hidden;
   position: relative;
   display: flex;
-  height: 450px;
+  height: 200px;
 
+  @media screen and (min-width: 760px) {
+    height: 450px;
+  }
 
-  img {
+  .image {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
     opacity: 0;
     transform: scale(1.1) translateY(10px);
+    transition: all 0.3s ease-out;
 
     &.active {
+      overflow: hidden;
       opacity: 1;
       transform: scale(1) translateY(0px);
     }
   }
-`
+`;
 const CaroControls = styled.div`
   display: flex;
   color: white;
@@ -55,7 +67,7 @@ class ImageCarousel extends React.Component {
   constructor(){
     super();
     this.state = {
-      currentImage: 0,
+      currentIndex: 0,
       isTransitioning: false,
       toLeft: false
     };
@@ -81,34 +93,42 @@ class ImageCarousel extends React.Component {
     }
   };
 
-  
+  showNext = () => {
+    const currentIndex = (this.state.currentIndex + 1) % this.props.images.length;
+    this.setState({ currentIndex });
+  };
+
+  showPrev = () => {
+    const currentIndex = (this.state.currentIndex - 1 + this.props.images.length) % this.props.images.length;
+    this.setState({ currentIndex });
+  }
 
   render() {
-    const {images} = this.props;
-    const { 
-      currentImage,
-      isTransitioning,
-      goLeft
-    } = this.state;
+    const { images } = this.props;
+    const { currentIndex } = this.state;
 
     return (
       <Wrapper>
         <Carousel>
-          {images.map((image, index) => (
-            <img
-              key={index}
-              className={currentImage === index ? "active" : ""}
-              src={image}
-              alt={""}
-            />
-          ))}
+          {images.map((image, index) => {
+            let className = "image";
+            if (index === currentIndex) className += " active";
+            return (
+              <img
+                src={image}
+                className={className}
+                key={`img-${index}`}
+                alt={""}
+              />
+            );  
+          })}
         </Carousel>
         <CaroControls>
-          <button>
-            <FontAwesome name="angle-left" onClick={this.showPrev} />
+          <button onClick={this.showPrev}>
+            <FontAwesome name="angle-left" />
           </button>
-          <button>
-            <FontAwesome name="angle-right" onClick={this.showNext} />
+          <button onClick={this.showNext}>
+            <FontAwesome name="angle-right" />
           </button>
         </CaroControls>
       </Wrapper>
