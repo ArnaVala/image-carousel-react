@@ -2,6 +2,9 @@
   "name": "image-carousel-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://av-react-image-carousel.netlify.com",
+  "author": "Arna Vala",
+  "repository": "https://github.com/ArnaVala/image-carousel-react",
   "dependencies": {
     "font-awesome": "^4.7.0",
     "node-sass": "^4.11.0",
