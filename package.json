@@ -7,7 +7,7 @@
   "repository": "https://github.com/ArnaVala/image-carousel-react",
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-fontawesome": "^1.6.1",
